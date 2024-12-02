@@ -1,0 +1,7 @@
+{
+  "rubocop.autocorrect": true,
+  "rubocop.mode": "disable",
+  "github.copilot.advanced": {
+    
+  }
+}
