@@ -1,9 +1,10 @@
 # Open the input.txt file and read its contents
-file_path = './input.txt'
+file_path = '/day_1/input.txt'
+dir = File.expand_path(File.dirname(File.dirname(__FILE__)))
 numbers1 = []
 numbers2 = []
 
-File.foreach(file_path) do |line|
+File.foreach([dir, file_path].join) do |line|
   num1, num2 = line.split.map(&:to_i)
   numbers1 << num1
   numbers2 << num2
