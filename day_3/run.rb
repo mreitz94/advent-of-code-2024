@@ -1,9 +1,12 @@
 file_path = '/day_3/input.txt'
 dir = File.expand_path(File.dirname(File.dirname(__FILE__)))
 input = File.read([dir, file_path].join)
-puts input.class
-multis = input.scan(/(do\(\)|don't\(\))|mul\((\d{1,3}),(\d{1,3})\)/)
 
+# matches will take one of the following forms:
+# - ["do()", nil, nil]
+# - ["don't()", nil, nil]
+# - [nil, "123", "456"]
+multis = input.scan(/(do\(\)|don't\(\))|mul\((\d{1,3}),(\d{1,3})\)/)
 sum = 0
 enabled = true
 
