@@ -65,19 +65,33 @@ class Region
   end
 
   def sides
-    sides = 0
-
-    coordinates.each do |coordinate|
+    coordinates.sum do |coordinate|
       x, y = coordinate
 
-      down = grid.at(x + 1, y)
-      up = grid.at(x - 1, y)
-      left = grid.at(x, y - 1)
-      right = grid.at(x, y + 1)
+      s = grid.at(x + 1, y)
+      n = grid.at(x - 1, y)
+      e = grid.at(x, y + 1)
+      w = grid.at(x, y - 1)
+      se = grid.at(x + 1, y + 1)
+      sw = grid.at(x + 1, y - 1)
+      ne = grid.at(x - 1, y + 1)
+      nw = grid.at(x - 1, y - 1)
+      
+      interior_corners = [
+        [s, e, se],
+        [s, w, sw],
+        [n, e, ne],
+        [n, w, nw],
+      ].count { |neighbors| neighbors[0] == type && neighbors[1] == type && neighbors[2] != type }
 
-      like_neighbors = neighbors.select do |neighbor_coordinate|
-        grid.at(*neighbor_coordinate) == type
-      end
+      exterior_corners = [
+        [s, e],
+        [s, w],
+        [n, e],
+        [n, w],
+      ].count { |neighbors| neighbors.none? { |neighbor| neighbor == type } }
+
+      interior_corners + exterior_corners
     end
   end
 end
@@ -123,4 +137,11 @@ regions.each do |region|
   region_prices += region.area * region.perimeter
 end
 
-puts "Total region prices: #{region_prices}"
+puts "Total region prices p1: #{region_prices}"
+
+region_prices = 0
+regions.each do |region|
+  region_prices += region.area * region.sides
+end
+
+puts "Total region prices p2: #{region_prices}"

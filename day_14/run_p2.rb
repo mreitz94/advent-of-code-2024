@@ -23,8 +23,6 @@ class Robot
     position[1] = position[1] - height if position[1] >= height
     # puts "new position: #{position} after teleport"
   end
-
-
 end
 
 robots = []
@@ -75,8 +73,6 @@ def get_quadrant(position, width, height)
     return 4
   end
 end
-
-
 
 10000.times do |i|
   robots.each do |robot|
