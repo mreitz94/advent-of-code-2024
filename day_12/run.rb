@@ -67,7 +67,7 @@ class Region
   def sides
     sides = 0
 
-    coordinates.sort.each do |coordinate|
+    coordinates.each do |coordinate|
       x, y = coordinate
 
       down = grid.at(x + 1, y)
